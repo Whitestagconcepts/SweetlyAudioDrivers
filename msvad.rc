@@ -1,0 +1,30 @@
+/*++
+
+Copyright (c) 1997-2000  Microsoft Corporation All Rights Reserved
+
+Module Name:
+
+    msvad.rc
+
+Abstract:
+
+
+--*/
+
+#include <windows.h>
+
+#include <ntverp.h>
+
+#define VER_FILETYPE                VFT_DRV
+#define VER_FILESUBTYPE             VFT2_DRV_SOUND
+#define VER_FILEDESCRIPTION_STR     "Sweetly Session Audio Driver"
+#define VER_INTERNALNAME_STR        "vadsimpl.sys"
+#define VER_ORIGINALFILENAME_STR    "vadsimpl.sys"
+
+#define VER_LEGALCOPYRIGHT_YEARS    "2025"
+#define VER_LEGALCOPYRIGHT_STR	    "Copyright (C) Sweetly Translate " VER_LEGALCOPYRIGHT_YEARS
+
+#include "common.ver"
+
+
+

@@ -1,0 +1,28 @@
+# Build artifacts
+x64/
+Debug/
+Release/
+*.sys
+*.obj
+*.log
+*.tlog
+*.pdb
+*.res
+*.lastbuildstate
+*.recipe
+*.idb
+*.ilk
+*.user
+*.suo
+*.db
+*.ipch
+*.iobj
+*.ipdb
+*.aps
+*.sdf
+.vs/
+
+# Package artifacts
+*.cat
+*.cer
+

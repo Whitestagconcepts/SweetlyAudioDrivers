@@ -1,0 +1,244 @@
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%SweetlyProvider%
+DriverVer=11/18/2025,1.1.0.0
+CatalogFile=SweetlyVirtualAudio.cat
+PnpLockDown=1
+
+[SourceDisksNames]
+222="Sweetly Virtual Audio Driver Disk","",222
+
+[SourceDisksFiles]
+vadsimpl.sys=222
+vadsimpl_b.sys=222
+
+[Manufacturer]
+%SweetlyMfg%=SweetlyModels,NTAMD64
+
+[SweetlyModels.NTAMD64]
+%SweetlySessionOut.DeviceDesc%=Sweetly_SessionOut,Root\SWLYSessionOutput
+%SweetlySessionIn.DeviceDesc%=Sweetly_SessionIn,Root\SWLYSessionInput
+%SweetlySessionOutB.DeviceDesc%=Sweetly_SessionOutB,Root\SWLYSessionOutputB
+%SweetlySessionInB.DeviceDesc%=Sweetly_SessionInB,Root\SWLYSessionInputB
+
+[DestinationDirs]
+Sweetly.CopyList=10,system32\drivers
+
+;------------------------------------------------------------------------------
+; Sweetly Session Output (Cable A)
+;------------------------------------------------------------------------------
+[Sweetly_SessionOut.NT]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=Sweetly.CopyList
+AddReg=MSVAD_Simple.AddReg,Sweetly_SessionOut.AddReg
+
+[Sweetly_SessionOut.NT.Services]
+AddService=msvad_simple,0x00000002,msvad_Simple_Service_Inst
+
+[Sweetly_SessionOut.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveSessionOut%,MSVAD.I.Wave.OutA
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveSessionOut%,MSVAD.I.Wave.OutA
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveSessionOut%,MSVAD.I.Wave.OutA
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_TopologySessionOut%,MSVAD.I.Topo
+
+[Sweetly_SessionOut.AddReg]
+HKR,Drivers\wave\wdmaud.drv,Description,,%SweetlySessionOut.DeviceDesc%
+HKLM,%MediaCategories%\%SweetlySessionOut.NameGuid%,Name,,%SweetlySessionOut.Name%
+HKR,EP\0,%PKEY_AudioEndpoint_Supports_EventDriven_Mode%,0x00010001,0x1
+
+;------------------------------------------------------------------------------
+; Sweetly Session Input (Cable A)
+;------------------------------------------------------------------------------
+[Sweetly_SessionIn.NT]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=Sweetly.CopyList
+AddReg=MSVAD_Simple.AddReg,Sweetly_SessionIn.AddReg
+
+[Sweetly_SessionIn.NT.Services]
+AddService=msvad_simple,0x00000002,msvad_Simple_Service_Inst
+
+[Sweetly_SessionIn.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveSessionIn%,MSVAD.I.Wave.InA
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveSessionIn%,MSVAD.I.Wave.InA
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveSessionIn%,MSVAD.I.Wave.InA
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_TopologySessionIn%,MSVAD.I.Topo
+
+[Sweetly_SessionIn.AddReg]
+HKR,Drivers\wave\wdmaud.drv,Description,,%SweetlySessionIn.DeviceDesc%
+HKLM,%MediaCategories%\%SweetlySessionIn.NameGuid%,Name,,%SweetlySessionIn.Name%
+HKR,EP\0,%PKEY_AudioEndpoint_Supports_EventDriven_Mode%,0x00010001,0x1
+
+;------------------------------------------------------------------------------
+; Sweetly Session Output B (Cable B)
+;------------------------------------------------------------------------------
+[Sweetly_SessionOutB.NT]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=Sweetly.CopyList
+AddReg=MSVAD_SimpleB.AddReg,Sweetly_SessionOutB.AddReg
+
+[Sweetly_SessionOutB.NT.Services]
+AddService=msvad_simple_b,0x00000002,msvad_SimpleB_Service_Inst
+
+[Sweetly_SessionOutB.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveSessionOutB%,MSVAD.I.Wave.OutB
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveSessionOutB%,MSVAD.I.Wave.OutB
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveSessionOutB%,MSVAD.I.Wave.OutB
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_TopologySessionOutB%,MSVAD.I.Topo
+
+[Sweetly_SessionOutB.AddReg]
+HKR,Drivers\wave\wdmaud.drv,Description,,%SweetlySessionOutB.DeviceDesc%
+HKLM,%MediaCategories%\%SweetlySessionOutB.NameGuid%,Name,,%SweetlySessionOutB.Name%
+HKR,EP\0,%PKEY_AudioEndpoint_Supports_EventDriven_Mode%,0x00010001,0x1
+
+;------------------------------------------------------------------------------
+; Sweetly Session Input B (Cable B)
+;------------------------------------------------------------------------------
+[Sweetly_SessionInB.NT]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=Sweetly.CopyList
+AddReg=MSVAD_SimpleB.AddReg,Sweetly_SessionInB.AddReg
+
+[Sweetly_SessionInB.NT.Services]
+AddService=msvad_simple_b,0x00000002,msvad_SimpleB_Service_Inst
+
+[Sweetly_SessionInB.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_WaveSessionInB%,MSVAD.I.Wave.InB
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_WaveSessionInB%,MSVAD.I.Wave.InB
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_WaveSessionInB%,MSVAD.I.Wave.InB
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_TopologySessionInB%,MSVAD.I.Topo
+
+[Sweetly_SessionInB.AddReg]
+HKR,Drivers\wave\wdmaud.drv,Description,,%SweetlySessionInB.DeviceDesc%
+HKLM,%MediaCategories%\%SweetlySessionInB.NameGuid%,Name,,%SweetlySessionInB.Name%
+HKR,EP\0,%PKEY_AudioEndpoint_Supports_EventDriven_Mode%,0x00010001,0x1
+
+[Sweetly.CopyList]
+vadsimpl.sys
+vadsimpl_b.sys
+
+;------------------------------------------------------------------------------
+; Common miniport registration (Cable A)
+;------------------------------------------------------------------------------
+[MSVAD_Simple.AddReg]
+HKR,,AssociatedFilters,,"wdmaud"
+HKR,,Driver,,vadsimpl.sys
+HKR,Drivers,SubClasses,,"wave"
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKLM,%MediaCategories%\%Simple.NameGuid%,Name,,%Simple.Name%
+
+;------------------------------------------------------------------------------
+; Common miniport registration (Cable B)
+;------------------------------------------------------------------------------
+[MSVAD_SimpleB.AddReg]
+HKR,,AssociatedFilters,,"wdmaud"
+HKR,,Driver,,vadsimpl_b.sys
+HKR,Drivers,SubClasses,,"wave"
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKLM,%MediaCategories%\%SimpleB.NameGuid%,Name,,%SimpleB.Name%
+
+;------------------------------------------------------------------------------
+; Wave Interface Registrations (Distinct names)
+;------------------------------------------------------------------------------
+[MSVAD.I.Wave.OutA]
+AddReg=MSVAD.I.Wave.OutA.AddReg
+[MSVAD.I.Wave.OutA.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%SweetlySessionOut.Name%
+
+[MSVAD.I.Wave.InA]
+AddReg=MSVAD.I.Wave.InA.AddReg
+[MSVAD.I.Wave.InA.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%SweetlySessionIn.Name%
+
+[MSVAD.I.Wave.OutB]
+AddReg=MSVAD.I.Wave.OutB.AddReg
+[MSVAD.I.Wave.OutB.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%SweetlySessionOutB.Name%
+
+[MSVAD.I.Wave.InB]
+AddReg=MSVAD.I.Wave.InB.AddReg
+[MSVAD.I.Wave.InB.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%SweetlySessionInB.Name%
+
+[MSVAD.I.Topo]
+AddReg=MSVAD.I.Topo.AddReg
+
+[MSVAD.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%MSVAD.Topo.szPname%
+
+[msvad_Simple_Service_Inst]
+DisplayName=%msvad_simple.SvcDesc%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%10%\system32\drivers\vadSimpl.sys
+
+[msvad_SimpleB_Service_Inst]
+DisplayName=%msvad_simpleB.SvcDesc%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%10%\system32\drivers\vadSimpl_b.sys
+
+;------------------------------------------------------------------------------
+; Strings
+;------------------------------------------------------------------------------
+[Strings]
+SweetlyProvider="Sweetly Translate"
+SweetlyMfg="Sweetly Audio"
+
+SweetlySessionOut.DeviceDesc="Connect to Sweetly Session A Output"
+SweetlySessionOut.Name="Connect to Sweetly Session A Output"
+SweetlySessionOut.NameGuid="{B81F9FF0-3A6A-4A58-A80C-5A913C60D967}"
+
+SweetlySessionIn.DeviceDesc="Connect to 3rd Party App Input"
+SweetlySessionIn.Name="Connect to 3rd Party App Input"
+SweetlySessionIn.NameGuid="{1C8E21F8-1F9C-49D9-82B2-8C6EC7CE1E4C}"
+
+SweetlySessionOutB.DeviceDesc="Connect to 3rd Party Output"
+SweetlySessionOutB.Name="Connect to 3rd Party Output"
+SweetlySessionOutB.NameGuid="{B81F9FF0-3A6A-4A58-A80C-5A913C60D968}"
+
+SweetlySessionInB.DeviceDesc="Connect to Sweetly Session B Input"
+SweetlySessionInB.Name="Connect to Sweetly Session B Input"
+SweetlySessionInB.NameGuid="{1C8E21F8-1F9C-49D9-82B2-8C6EC7CE1E4D}"
+
+MSVAD_Simple.DeviceDesc="Sweetly Session Audio Driver"
+MSVAD.Wave.szPname="Sweetly Session Wave"
+MSVAD.Topo.szPname="Sweetly Session Topology"
+msvad_simple.SvcDesc="Sweetly Session Audio Driver Service"
+
+msvad_simpleB.SvcDesc="Sweetly Session Audio Driver Service B"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+
+KSNAME_WaveSessionOut="SweetlyWaveSessionOut"
+KSNAME_TopologySessionOut="SweetlyTopologySessionOut"
+KSNAME_WaveSessionIn="SweetlyWaveSessionIn"
+KSNAME_TopologySessionIn="SweetlyTopologySessionIn"
+
+KSNAME_WaveSessionOutB="SweetlyWaveSessionOutB"
+KSNAME_TopologySessionOutB="SweetlyTopologySessionOutB"
+KSNAME_WaveSessionInB="SweetlyWaveSessionInB"
+KSNAME_TopologySessionInB="SweetlyTopologySessionInB"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+Simple.NameGuid="{F5E87754-0E0D-4100-8EAD-7CB285D34055}"
+Simple.Name="Sweetly Session Bridge"
+
+SimpleB.NameGuid="{F5E87754-0E0D-4100-8EAD-7CB285D34056}"
+SimpleB.Name="Sweetly Session Bridge B"
+
